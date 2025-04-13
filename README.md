@@ -14,8 +14,8 @@
 
 - **macOS**:
 
-  1. Скачайте и установите Docker Desktop с [официального сайта](https://www.docker.com/products/docker-desktop).
-  2. Убедитесь, что Docker и Docker Compose установлены, запустив команду:
+1. Скачайте и установите Docker Desktop с [официального сайта](https://www.docker.com/products/docker-desktop).
+2. Убедитесь, что Docker и Docker Compose установлены, запустив команду:
      ```bash
      docker --version
      docker-compose --version
