@@ -1,19 +1,13 @@
-import { Layout } from 'antd';
-import { Outlet } from 'react-router-dom';
-import { Header } from '@/components';
-
-const { Content } = Layout;
+import { Layout } from "antd";
+import { Content, Header } from "@/components";
 
 function App() {
   return (
     <Layout>
       <Header />
-      <Content>
-        <Outlet />
-      </Content>
+      <Content />
     </Layout>
   );
 }
 
 export default App;
-
