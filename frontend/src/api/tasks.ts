@@ -1,4 +1,4 @@
-import { TBoard, TTask } from "@/types";
+import { TBoard, TTask, TUser } from "@/types";
 import axios from "axios";
 
 const API_URL = "http://localhost:8080/api/v1";
@@ -102,15 +102,15 @@ export const getTaskById = async (taskId: string): Promise<TTask> => {
 //   }
 // };
 
-// export const getUsers = async (): Promise<TUser[]> => {
-//   try {
-//     const response = await axios.get(`${API_URL}/users`);
-//     return response.data;
-//   } catch (error) {
-//     console.error("Ошибка при получении пользователей:", error);
-//     throw error;
-//   }
-// };
+export const getUsers = async (): Promise<TUser[]> => {
+  try {
+    const response = await axios.get(`${API_URL}/users`);
+    return response.data.data;
+  } catch (error) {
+    console.error("Ошибка при получении пользователей:", error);
+    throw error;
+  }
+};
 
 export const getUserTasks = async (userId: string): Promise<TTask[]> => {
   try {

@@ -1,14 +1,29 @@
-import { getTasks } from "@/api/tasks";
-import { TaskCard, TaskModal } from "@/components";
-import { TTask } from "@/types";
-import { Row, Col, Button } from "antd";
+import { getBoards, getTasks, getUsers } from "@/api/tasks";
+import { CreateTaskButton, TaskCard } from "@/components";
+import { TBoard, TTask, TUser } from "@/types";
+import { Row, Col, message } from "antd";
 import { useState, useEffect } from "react";
 
-// const { Option } = Select;
-
 const Issues = () => {
+  const [users, setUsers] = useState<TUser[]>([]);
+  const [boards, setBoards] = useState<TBoard[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const usersData = await getUsers();
+        const boardsData = await getBoards();
+        setUsers(usersData);
+        setBoards(boardsData.data);
+      } catch {
+        message.error("Не удалось загрузить пользователей или проекты");
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const [tasks, setTasks] = useState<TTask[]>([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const fetchTasks = async () => {
     try {
@@ -23,21 +38,11 @@ const Issues = () => {
     fetchTasks();
   }, []);
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
   return (
     <div>
       <Row gutter={[16, 16]} style={{ marginBottom: "20px" }}>
         <Col span={6}>
-          <Button type="primary" onClick={openModal}>
-            Создать задачу
-          </Button>
+          <CreateTaskButton users={users} boards={boards} />
         </Col>
       </Row>
 
@@ -48,8 +53,6 @@ const Issues = () => {
           </Col>
         ))}
       </Row>
-
-      <TaskModal open={isModalOpen} onClose={closeModal} />
     </div>
   );
 };

@@ -24,3 +24,8 @@ export type TTask = {
   boardId: number;
   boardName: string;
 };
+
+export type TUser = {
+  id: number;
+  fullName: string;
+};
