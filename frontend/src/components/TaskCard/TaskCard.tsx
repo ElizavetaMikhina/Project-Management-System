@@ -4,10 +4,11 @@ import { Link } from "react-router-dom";
 
 type TTaskCardProps = {
   task: TTask;
+  onClick: (task: TTask) => void;
 };
 
-const TaskCard = ({ task }: TTaskCardProps) => (
-  <Card title={task.title}>
+const TaskCard = ({ task, onClick }: TTaskCardProps) => (
+  <Card title={task.title} onClick={() => onClick(task)}>
     <p>Описание: {task.description}</p>
     <p>Статус: {task.status}</p>
     <Link to={`/board/${task.boardId}`}>Перейти к доске</Link>

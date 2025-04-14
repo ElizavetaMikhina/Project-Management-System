@@ -1,1 +1,7 @@
-export type { TBoard, TTask, TBoardCardProps, TUser } from "./types";
+export type {
+  TBoard,
+  TTask,
+  TBoardCardProps,
+  TUser,
+  TFormValues,
+} from "./types";

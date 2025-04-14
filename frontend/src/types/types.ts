@@ -29,3 +29,12 @@ export type TUser = {
   id: number;
   fullName: string;
 };
+
+export type TFormValues = {
+  title: string;
+  description?: string;
+  boardId?: number;
+  priority: "Low" | "Medium" | "High";
+  status: "Backlog" | "InProgress" | "Done";
+  assigneeId: number;
+};

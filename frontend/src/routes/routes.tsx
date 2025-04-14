@@ -1,5 +1,5 @@
 import App from "@/App";
-import { Board, Boards, Issues } from "@/pages";
+import { BoardPage, BoardsPage, IssuesPage } from "@/pages";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -8,9 +8,9 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { path: "/", element: <Navigate to="/issues" /> },
-      { path: "boards", element: <Boards /> },
-      { path: "issues", element: <Issues /> },
-      { path: "board/:id", element: <Board /> },
+      { path: "boards", element: <BoardsPage /> },
+      { path: "issues", element: <IssuesPage /> },
+      { path: "board/:id", element: <BoardPage /> },
     ],
   },
 ]);

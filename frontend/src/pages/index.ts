@@ -1,3 +1,3 @@
-export { Board } from './Board';
-export { Boards } from './Boards';
-export { Issues } from './Issues';
+export { BoardPage } from "./BoardPage";
+export { BoardsPage } from "./BoardsPage";
+export { IssuesPage } from "./IssuesPage";

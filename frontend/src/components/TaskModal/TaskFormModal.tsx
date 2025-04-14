@@ -1,17 +1,9 @@
-import type { TTask, TBoard, TUser } from "@/types";
+import type { TTask, TBoard, TUser, TFormValues } from "@/types";
 import { Input, Form, Modal, Select, Button } from "antd";
 import { FC, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const { TextArea } = Input;
-
-type TFormValues = {
-  title: string;
-  description?: string;
-  boardId?: number;
-  priority: "Low" | "Medium" | "High";
-  status: "Todo" | "InProgress" | "Done";
-  assigneeId: number;
-};
 
 export type TTaskFormModalProps = {
   open: boolean;
@@ -37,16 +29,20 @@ const TaskFormModal: FC<TTaskFormModalProps> = ({
   onSubmit,
 }) => {
   const [form] = Form.useForm();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (open) {
-      if (initialValues) {
+      if (mode === "edit" && initialValues) {
         form.setFieldsValue(initialValues);
       } else {
         form.resetFields();
+        if (isBoardContext && boardIdFromContext) {
+          form.setFieldValue("boardId", boardIdFromContext);
+        }
       }
     }
-  }, [open, initialValues, form]);
+  }, [open, mode, initialValues, isBoardContext, boardIdFromContext, form]);
 
   const handleFinish = (values: TFormValues) => {
     onSubmit({
@@ -133,9 +129,12 @@ const TaskFormModal: FC<TTaskFormModalProps> = ({
             ))}
           </Select>
         </Form.Item>
-
         {!isBoardContext && initialValues?.boardId && (
-          <Button type="link" onClick={() => console.log("navigate to board")}>
+          <Button
+            type="link"
+            onClick={() => navigate(`/boards/${initialValues.boardId}`)}
+            style={{ padding: 0, marginBottom: 16 }}
+          >
             Перейти на доску
           </Button>
         )}
